@@ -10,31 +10,34 @@ const TYPE_STYLE = {
   INN:      { label: 'ИНН',      color: '#facc15', bg: '#fef9c3' },
 }
 
-function buildSegments(redactedTranscript, entities) {
-  if (!redactedTranscript) return []
+// Строим сегменты по original_transcript (позиции start_char/end_char бэкенд даёт именно для него).
+// Для отображения редактированного текста берём replaced_with из log.
+function buildSegments(originalTranscript, entities, log) {
+  if (!originalTranscript) return []
 
-  // Сортируем entities по start_char
   const sorted = [...entities].sort((a, b) => a.start_char - b.start_char)
   const segments = []
   let cursor = 0
 
   for (const entity of sorted) {
     if (entity.start_char > cursor) {
-      segments.push({ text: redactedTranscript.slice(cursor, entity.start_char), type: null })
+      segments.push({ text: originalTranscript.slice(cursor, entity.start_char), type: null })
     }
-    segments.push({ text: redactedTranscript.slice(entity.start_char, entity.end_char), type: entity.type })
+    const logEntry = log.find((l) => l.type === entity.type && l.text === entity.text)
+    const displayText = logEntry?.replaced_with ?? entity.text
+    segments.push({ text: displayText, type: entity.type })
     cursor = entity.end_char
   }
 
-  if (cursor < redactedTranscript.length) {
-    segments.push({ text: redactedTranscript.slice(cursor), type: null })
+  if (cursor < originalTranscript.length) {
+    segments.push({ text: originalTranscript.slice(cursor), type: null })
   }
 
   return segments
 }
 
-export default function TranscriptViewer({ originalTranscript, redactedTranscript, entities = [] }) {
-  const segments = buildSegments(redactedTranscript, entities)
+export default function TranscriptViewer({ originalTranscript, redactedTranscript, entities = [], log = [] }) {
+  const segments = buildSegments(originalTranscript, entities, log)
   const usedTypes = [...new Set(entities.map((e) => e.type))].filter((t) => TYPE_STYLE[t])
 
   return (

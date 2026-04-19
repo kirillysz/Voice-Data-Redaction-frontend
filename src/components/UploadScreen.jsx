@@ -85,11 +85,11 @@ export default function UploadScreen({ onFileSelect, processing, processingStatu
             {error}
           </div>
         )}
+
+
       </div>
 
-      <button className="fixed bottom-6 right-6 w-10 h-10 rounded-full bg-gray-800 text-white text-sm font-bold flex items-center justify-center shadow-lg hover:bg-gray-700 transition-colors">
-        ?
-      </button>
+
     </div>
   )
 }
