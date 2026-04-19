@@ -7,7 +7,7 @@ const TYPE_COLORS = {
   EMAIL:    { label: 'Email',   color: '#ffffff', bg: '#7c6aaa' },
   ADDRESS:  { label: 'Адрес',   color: '#ffffff', bg: '#5080a0' },
   SNILS:    { label: 'СНИЛС',   color: '#ffffff', bg: '#4a9080' },
-  PASSPORT: { label: 'Паспорт', color: '#ffffff', bg: '#7a6850' },
+  PASSPORT: { label: 'Паспорт', color: '#ffffff', bg: '#6878b0' },
   INN:      { label: 'ИНН',     color: '#ffffff', bg: '#707858' },
 }
 

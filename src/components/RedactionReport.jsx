@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, ResponsiveCo
 const TYPE_META = {
   PERSON:   { label: 'Имена',    color: '#ef4444' },
   PHONE:    { label: 'Телефоны', color: '#f97316' },
-  EMAIL:    { label: 'Email',    color: '#a855f7' },
+  EMAIL:    { label: 'Почта',     color: '#a855f7' },
   ADDRESS:  { label: 'Адреса',   color: '#3b82f6' },
   SNILS:    { label: 'СНИЛС',    color: '#2dd4bf' },
   PASSPORT: { label: 'Паспорт',  color: '#a78bfa' },
