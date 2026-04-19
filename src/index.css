@@ -9,6 +9,33 @@
 body {
   margin: 0;
   font-family: 'Inter', system-ui, sans-serif;
-  background-color: #eef2f7;
   min-height: 100vh;
+}
+
+:root {
+  --bg-page:    #eef2f7;
+  --bg-card:    #ffffff;
+  --bg-subtle:  #f9fafb;
+  --bg-hover:   #f3f4f6;
+  --border:     #e5e7eb;
+  --text:       #111827;
+  --text-muted: #6b7280;
+  --text-faint: #9ca3af;
+}
+
+[data-theme="dark"] {
+  --bg-page:    #1a1a1a;
+  --bg-card:    #242424;
+  --bg-subtle:  #2e2e2e;
+  --bg-hover:   #333333;
+  --border:     #3a3a3a;
+  --text:       #e5e5e5;
+  --text-muted: #aaaaaa;
+  --text-faint: #666666;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text);
+  transition: background-color 0.2s, color 0.2s;
 }

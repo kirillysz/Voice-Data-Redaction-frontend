@@ -4,20 +4,22 @@ import TranscriptViewer from './TranscriptViewer.jsx'
 import RedactionReport from './RedactionReport.jsx'
 import { getAudioUrl } from '../api.js'
 
+const card = {
+  backgroundColor: 'var(--bg-card)',
+  borderRadius: '1rem',
+  boxShadow: '0 1px 3px rgba(0,0,0,0.07)',
+  transition: 'background-color 0.2s',
+}
+
 export default function ResultsScreen({ fileName, jobId, result, onNewRecording }) {
   const entities = result?.entities ?? []
-  const redactedCount = entities.length
 
   return (
-    <div className="min-h-screen bg-[#eef2f7] py-8 px-4">
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-1">Voice Data Redaction Service</h1>
-          <p className="text-gray-500 text-sm">Автоматическая детекция и редакция персональных данных в голосовых записях</p>
-        </div>
+    <div className="py-8 px-4">
+      <div className="max-w-3xl mx-auto flex flex-col gap-4">
 
-        <div className="bg-white rounded-2xl shadow-sm px-5 py-4 flex items-center gap-4 mb-4">
-          <div className="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
+        <div style={{ ...card, padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(59,130,246,0.1)' }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 18V5l12-2v13" />
               <circle cx="6" cy="18" r="3" />
@@ -25,8 +27,8 @@ export default function ResultsScreen({ fileName, jobId, result, onNewRecording 
             </svg>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-gray-900 truncate">{fileName}</p>
-            <p className="text-xs text-gray-400">{redactedCount} сегментов редактировано</p>
+            <p className="text-sm font-semibold truncate" style={{ color: 'var(--text)' }}>{fileName}</p>
+            <p className="text-xs" style={{ color: 'var(--text-faint)' }}>{entities.length} сегментов редактировано</p>
           </div>
           <div className="flex gap-3 flex-shrink-0">
             <a
@@ -39,30 +41,29 @@ export default function ResultsScreen({ fileName, jobId, result, onNewRecording 
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Скачать редактированную запись
+              Скачать
             </a>
             <button
               onClick={onNewRecording}
-              className="px-4 py-2 border border-gray-200 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
+              className="px-4 py-2 text-sm font-medium rounded-lg transition-colors"
+              style={{ border: '1px solid var(--border)', color: 'var(--text-muted)', backgroundColor: 'transparent' }}
+              onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
+              onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
             >
               Новая запись
             </button>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4">
-          <AudioPlayer audioUrl={getAudioUrl(jobId)} entities={entities} />
-          <TranscriptViewer
-            originalTranscript={result?.original_transcript ?? ''}
-            redactedTranscript={result?.redacted_transcript ?? ''}
-            entities={entities}
-            log={result?.log ?? []}
-          />
-          <RedactionReport entities={entities} log={result?.log ?? []} />
-        </div>
+        <AudioPlayer audioUrl={getAudioUrl(jobId)} entities={entities} />
+        <TranscriptViewer
+          originalTranscript={result?.original_transcript ?? ''}
+          entities={entities}
+          log={result?.log ?? []}
+        />
+        <RedactionReport entities={entities} log={result?.log ?? []} />
+
       </div>
-
-
     </div>
   )
 }
