@@ -17,6 +17,7 @@ body {
   --bg-card:    #ffffff;
   --bg-subtle:  #f9fafb;
   --bg-hover:   #f3f4f6;
+  --bg-btn:     #e8edf3;
   --border:     #e5e7eb;
   --text:       #111827;
   --text-muted: #6b7280;
@@ -28,6 +29,7 @@ body {
   --bg-card:    #242424;
   --bg-subtle:  #2e2e2e;
   --bg-hover:   #333333;
+  --bg-btn:     #2e2e2e;
   --border:     #3a3a3a;
   --text:       #e5e5e5;
   --text-muted: #aaaaaa;
@@ -38,4 +40,17 @@ body {
   background-color: var(--bg-page);
   color: var(--text);
   transition: background-color 0.2s, color 0.2s;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.page-enter {
+  animation: fadeSlideIn 0.22s ease both;
 }

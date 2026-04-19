@@ -17,15 +17,15 @@ export default function Header({ dark, onToggleDark, showBack, onBack, onHistory
           {showBack && (
             <button
               onClick={onBack}
-              className="w-8 h-8 rounded-lg flex items-center justify-center"
-              style={{ color: 'var(--text-muted)', background: 'none', border: 'none', cursor: 'pointer' }}
+              className="h-8 px-2 rounded-lg flex items-center gap-1.5"
+              style={{ color: 'var(--text-muted)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px' }}
               onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
               onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
-              title="Назад"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="15 18 9 12 15 6" />
               </svg>
+              Назад
             </button>
           )}
 
@@ -50,9 +50,9 @@ export default function Header({ dark, onToggleDark, showBack, onBack, onHistory
           <button
             onClick={onHistory}
             className="h-9 px-3 rounded-lg flex items-center gap-2 text-sm"
-            style={{ color: 'var(--text-muted)', background: 'none', border: 'none', cursor: 'pointer' }}
+            style={{ color: 'var(--text-muted)', background: 'var(--bg-btn)', border: 'none', cursor: 'pointer' }}
             onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
-            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--bg-btn)'}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10" />
@@ -65,9 +65,9 @@ export default function Header({ dark, onToggleDark, showBack, onBack, onHistory
             onClick={onToggleDark}
             title={dark ? 'Светлая тема' : 'Тёмная тема'}
             className="w-9 h-9 rounded-lg flex items-center justify-center"
-            style={{ color: 'var(--text-muted)', background: 'none', border: 'none', cursor: 'pointer' }}
+            style={{ color: 'var(--text-muted)', background: 'var(--bg-btn)', border: 'none', cursor: 'pointer' }}
             onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--bg-hover)'}
-            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'var(--bg-btn)'}
           >
             {dark ? (
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

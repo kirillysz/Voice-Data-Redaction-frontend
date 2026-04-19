@@ -126,11 +126,11 @@ export default function App() {
       <Header
         dark={dark}
         onToggleDark={() => setDark(d => !d)}
-        showBack={screen === 'results'}
-        onBack={handleNewRecording}
+        showBack={screen !== 'upload'}
+        onBack={screen === 'results' ? handleNewRecording : () => setScreen('upload')}
         onHistory={() => navigate('history')}
       />
-      <main style={{ flex: 1 }}>
+      <main key={screen} className="page-enter" style={{ flex: 1 }}>
         {renderScreen()}
       </main>
       <Footer />
